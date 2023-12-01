@@ -45,8 +45,8 @@ export default function page() {
         <div className='max-w-7xl mx-auto'>
             <h1 className='text-2xl md:text-3xl lg:text-7xl text-center text-white mb-4'>Loyihaning qulayliklari</h1>
             <div className='grid grid-cols-1 lg:grid-cols-3 gap-2'>
-                {data.map((date, id) => (
-                    <div key={id} data-aos-duration="2000" data-aos="flip-left" className='card text-[#FFA537] p-6'>
+                {data.map((date, id, index) => (
+                    <div key={index} data-aos-duration="2000" data-aos="flip-left" className='card text-[#FFA537] p-6'>
                         <div className='text-3xl md:text-5xl lg:text-9xl'>{date.icon}</div>
                         <h3 className='text-white text-[15px] pt-5 md:text-xl md:pt-10'>{date.description}</h3>
                     </div>

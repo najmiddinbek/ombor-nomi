@@ -13,7 +13,6 @@ export default function AddTopic() {
   const [description, setDescription] = useState("");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
-  const [secondDate, setSecondDate] = useState("");
   const [generatedNumber, setGeneratedNumber] = useState("9860123456781234");
 
   const [timeValue, setTimeValue] = useState(0);
@@ -38,18 +37,6 @@ export default function AddTopic() {
     } else { setTimeValue(0); }
   }, [time]);
 
-  useEffect(() => {
-    if (secondDate === '1-soat') {
-      setTimeValue(150000);
-    } else if (secondDate === '2-soat') {
-      setTimeValue(300000);
-    }
-    else if (secondDate === '3-soat') {
-      setTimeValue(450000);
-    } else if (secondDate === '4-soat') {
-      setTimeValue(600000);
-    } else { setTimeValue(0); }
-  }, [secondDate]);
 
   const handleCopyClick = async (e) => {
     e.preventDefault(); // Prevent the default button click behavior
@@ -83,7 +70,7 @@ export default function AddTopic() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !description || !time || !secondDate) {
+    if (!title || !description || !time || !date) {
       toast.error('Barcha maydonlarni to`ldiring!!!', {
         position: "top-center",
         autoClose: 10000,
@@ -96,7 +83,7 @@ export default function AddTopic() {
       });
       return;
     }
-    const existingTopic = await checkExistingTopic({ title, description, time, date, secondDate });
+    const existingTopic = await checkExistingTopic({ title, description, time, date, });
 
     if (existingTopic) {
       alert("A topic with the same values already exists.");
@@ -109,7 +96,7 @@ export default function AddTopic() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ title, description, time, date, secondDate }),
+        body: JSON.stringify({ title, description, time, date, }),
       });
 
       if (res.ok) {
