@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import RemoveBtn from "./RemoveBtn";
 
 const Filter = () => {
     const [topics, setTopiclar] = useState([]);
@@ -87,7 +88,7 @@ const Filter = () => {
                 <div className="">
                     <div className="">
                         <div data-aos-duration="2000" data-aos="fade-right" className="flex items-center gap-1 mb-3">
-                            <input className="border-2 py-4 px-2 w-full rounded-md" placeholder="Band qilingan sanani yozing (kun,oy,yil)" type="text" value={filterValue.date} onChange={(e) => setFilterValue({ ...filterValue, date: e.target.value })} />
+                            <input className="border py-2 px-2 w-full rounded-md" placeholder="Band qilingan sanani yozing (kun,oy,yil)" type="text" value={filterValue.date} onChange={(e) => setFilterValue({ ...filterValue, date: e.target.value })} />
                             <button className="green" onClick={handleFilter} >
                                 Izlash
                             </button>
@@ -97,49 +98,36 @@ const Filter = () => {
                 {Object.keys(usersAddedByDate)
                     .reverse()
                     .map((date) => (
-                        <div key={date}>
+                        <>
                             <div className="flex gap-2 items-center mt-10 justify-between mb-5">
                                 <h3 className="text-2xl text-white font-bold poppins">
                                     {date} sanasidagi band qilgan mijozlar:
                                 </h3>
                             </div>
-                            <table className="main_table w-full shadow-xl text-white  py-4 px-10">
-                                <thead className="text-center text-2xl">
-                                    <tr>
-                                        <td>№</td>
-                                        <td className="py-4 px-10">Ismi</td>
-                                        <td>Qaysi vaqtga</td>
-                                        <td>Qaysi sanaga</td>
-                                        <td>Qancha vaqtga</td>
-                                        <td></td>
-                                    </tr>
-                                </thead>
-                                {/* ... */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-2 md:gap-3 lg:gap-4" key={date}>
                                 {usersAddedByDate[date]
                                     .filter((t) =>
                                         filterStatus === null ? true : t.isChecked === filterStatus
                                     )
                                     .map((t, index) => (
-                                        <tbody key={t.id} className="text-center w-full">
-                                            <tr>
-                                                <td>{index + 1}</td>
-                                                <td>{t.title}</td>
-                                                <td>{t.description}</td>
-                                                <td>{t.date}</td>
-                                                <td>{t.time}</td>
-                                                <td>
-                                                    <button className={`py-2 ml-2 px-2 ${t.isChecked
-                                                        ? "text-white green rounded-md cursor-pointer"
-                                                        : "text-white bg-red-700 rounded-md cursor-pointer"
-                                                        }`}>
-                                                        {t.isChecked ? "To`lov qilingan" : "To`lov qilinmagan"}
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <div>
+                                            <div className="blur2 border py-3 px-4 rounded-md text-white" key={t.id}>
+                                                <h1 className="text-4xl">Ismi: {t.title}</h1>
+                                                <p className="text-xl">Qaysi sanaga: {t.description}</p>
+                                                <p>Qancha vaqtga: {t.time}</p>
+                                                <p>Qaysi vaqtga: {t.date}</p>
+                                                <button className={`py-2 px-2 mt-3 ${t.isChecked
+                                                    ? "text-white green rounded-md cursor-pointer"
+                                                    : "text-white bg-red-700 rounded-md cursor-pointer"
+                                                    }`}>
+                                                    {t.isChecked ? "To`lov qilingan" : "To`lov qilinmagan"}
+                                                </button>
+                                                {/* <RemoveBtn id={t._id} /> */}
+                                            </div>
+                                        </div>
                                     ))}
-                            </table>
-                        </div>
+                            </div>
+                        </>
                     ))}
             </div>
         </div>

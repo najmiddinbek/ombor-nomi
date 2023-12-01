@@ -135,11 +135,30 @@ export default function AddTopic() {
 
       return existingTopic;
     } catch (error) {
-      alert("Hatolik")
+      toast.error('Sizda internet bilan bog`liq muammo bor!', {
+        position: "top-center",
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.error("Error checking existing topic:", error);
       return null;
     }
   };
+
+  const [price, setPrice] = useState("Bir soatga 150.000 so`m");
+
+  useEffect(() => {
+    if (timeValue > 0) {
+      setPrice(`Bir soatga ${timeValue} som`);
+    } else {
+      setPrice("Tanlang");
+    }
+  }, [timeValue]);
 
 
   const [price1, setPrice1] = useState(" Bir soatga 150.000 so`m")
@@ -159,7 +178,7 @@ export default function AddTopic() {
         {/* 
         <input data-aos-duration="1000" data-aos="fade-up" onChange={(e) => setDate(e.target.value)} value={date} className="bg-[#1111] text-white border-2 border-white px-8 py-2" type="time" placeholder="Topic Description" /> */}
 
-        <select className="text-white bg-[#1111] border-2 border-white px-8 py-2" onChange={(e) => setDate(e.target.value)} value={date}>
+        <select data-aos-duration="1000" data-aos="fade-up" className="text-white bg-[#1111] border-2 border-white px-8 py-2" onChange={(e) => setDate(e.target.value)} value={date}>
           <option>Tanlang</option>
           <option>8:00</option>
           <option>9:00</option>
@@ -182,16 +201,25 @@ export default function AddTopic() {
 
         <label data-aos-duration="1000" data-aos="fade-up" className="text-white text-[18px] md:text-2xl mt-3">Qancha vaqtga band qilmoqchisiz?</label>
 
-        <select className="border-2 border-slate-500 px-8 py-2 bg-[#1111] text-white rounded-md" onChange={(e) => setTime(e.target.value)} value={time}>  <option>Tanlang</option>  <option>1-soat</option>  <option>2-soat</option>  <option>3-soat</option> <option>4-soat</option>
+        <select data-aos-duration="1000" data-aos="fade-up" className="border-2 border-slate-500 px-8 py-2 bg-[#1111] text-white rounded-md" onChange={(e) => setTime(e.target.value)} value={time}>
+          <option>Tanlang</option>
+          <option>1-soat</option>
+          <option>2-soat</option>
         </select>
 
         {/* <input onChange={(e) => setTime(e.target.value)} value={time} className="border-2 border-white px-8 py-2" type="text" placeholder="Topic Description" /> */}
-        <div className="block md:flex w-full flex-wrap gap-4">
+        <div data-aos-duration="1000" data-aos="zoom-in-out" className="block md:flex w-full flex-wrap gap-4">
           <div className="md:w-[48%] w-full">
             <Image src={CreditCard} alt="Credit Card" />
           </div>
           <div className="w-[48%] text-white">
-            <h1>{timeValue}</h1>
+            {date.includes(price1) ? (
+              <>
+                <h1 className="text-2xl md:text-3xl lg:text-4xl">{price1}</h1>
+              </>
+            ) : (
+              <h1 className="text-white text-2xl md:text-3xl lg:text-4xl">Bir soatga  {timeValue}so`m</h1>
+            )}
             <h1 className="text-4xl mt-2 mb-3 lg:text-6xl font-bold ">{generatedNumber}</h1>
             <button className="green button" onClick={handleCopyClick}>
               Nusxa olish
