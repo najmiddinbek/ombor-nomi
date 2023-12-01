@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { SiTruenas } from "react-icons/si";
-import { FaRoad } from "react-icons/fa6";
+// import { FaRoad } from "react-icons/fa6";
 import { CgViewComfortable } from "react-icons/cg";
 import { GiMountainRoad } from "react-icons/gi";
 import { MdAttachMoney } from "react-icons/md";
@@ -16,7 +16,7 @@ export default function page() {
         },
         {
             id: 2,
-            icon: <FaRoad />,
+            // icon: <FaRoad />,
             description: 'Bu dastur yordamida har bir mijoz o`zi hohlagan paytda masofadan yagona o`zi to`lovni amalga oshirib stadionni band qila oladi.',
         },
         {
